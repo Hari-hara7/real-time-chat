@@ -1,4 +1,4 @@
-# 📱 Chat Application - Powered by Firebase
+# 📱 Chat Application - Powered by Academic pal
 
 ! <img src="image.jpg" alt="image"  ><!-- Replace this link with your actual image URL -->
 
