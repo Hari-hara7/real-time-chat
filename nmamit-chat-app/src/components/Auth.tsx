@@ -84,14 +84,14 @@ const Auth = ({ setUser }: { setUser: (user: any) => void }) => {
       {/* Footer */}
       <footer className="bg-black py-6 text-center text-gray-400">
         <div className="flex justify-center gap-6 mb-4">
-          <a href="#" className="text-yellow-500 hover:text-yellow-600">
+          <a href="https://hariharanath.is-cod.in/" className="text-yellow-500 hover:text-yellow-600">
             <MdSchool className="text-xl md:text-2xl" />
           </a>
-          <a href="#" className="text-blue-500 hover:text-blue-600">
+          <a href="" className="text-blue-500 hover:text-blue-600">
             <SiAcademia className="text-xl md:text-2xl" />
           </a>
           <a
-            href="https://your-portfolio-link.com"
+            href="https://hariharanath.is-cod.in/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-purple-500 hover:text-purple-600"
@@ -102,7 +102,7 @@ const Auth = ({ setUser }: { setUser: (user: any) => void }) => {
         <p className="text-sm md:text-base mb-2">
           Designed and Developed by{" "}
           <a
-            href="https://your-portfolio-link.com"
+            href="https://hariharanath.is-cod.in/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-400 underline hover:text-blue-500"
