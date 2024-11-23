@@ -23,7 +23,6 @@ const Chat = ({ user }: { user: any }) => {
   const [file, setFile] = useState<File | null>(null);
   const [isBotTyping, setIsBotTyping] = useState(false);
 
-  // Fetch messages from Firestore
   useEffect(() => {
     const q = query(collection(db, "messages"), orderBy("timestamp"));
 
@@ -38,36 +37,30 @@ const Chat = ({ user }: { user: any }) => {
     return () => unsubscribe();
   }, []);
 
-  // Send message to Firestore and emit to Socket.io
   const sendMessage = async () => {
     if (message.trim() || file) {
       const messageData = {
         user: user.displayName,
         text: message,
-        avatar: user.photoURL || FaUserCircle, // Default avatar
+        avatar: user.photoURL || FaUserCircle,
         timestamp: new Date().toISOString(),
         isBot: false,
         file: file ? await uploadFile(file) : null,
       };
 
-      // Add message to Firestore
       await addDoc(collection(db, "messages"), messageData);
-
-      // Emit message to Socket.io for real-time updates
       socket.emit("send_message", messageData);
 
-      setMessage(""); // Reset message input
-      setFile(null); // Reset file input
+      setMessage("");
+      setFile(null);
     }
   };
 
-  // Handle file upload
   const uploadFile = async (file: File) => {
     const fileUrl = "https://path.to.uploaded/file";
     return fileUrl;
   };
 
-  // Handle chat bot reply (simulating response)
   const sendBotReply = (message: string) => {
     setIsBotTyping(true);
     setTimeout(() => {
@@ -84,7 +77,6 @@ const Chat = ({ user }: { user: any }) => {
     }, 1500);
   };
 
-  // Handle message submission and bot detection
   const handleSubmit = () => {
     sendMessage();
     if (message.toLowerCase().includes("syllabus") || message.toLowerCase().includes("notes")) {
@@ -93,26 +85,30 @@ const Chat = ({ user }: { user: any }) => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-b from-indigo-900 to-black text-white">
-      {/* Header with Logo and Glassmorphism */}
-      <div className="flex items-center p-4 bg-opacity-60 backdrop-blur-md rounded-xl shadow-lg">
-        <img src={logo} alt="Academic Pal Logo" className="w-16 h-16 mr-4 rounded-full shadow-lg" />
+    <div className="flex flex-col h-screen bg-black text-white">
+      {/* Header with Logo */}
+      <div className="flex items-center p-4 border-b border-gray-700">
+        <img src={logo} alt="Academic Pal Logo" className="w-16 h-16 mr-4 rounded-full" />
         <h1 className="text-2xl font-semibold">Academic Pal Chat</h1>
       </div>
 
-      {/* Messages Section with Animations */}
+      {/* Messages Section */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((msg, index) => (
           <motion.div
             key={index}
-            className={`flex items-start space-x-3 p-3 rounded-xl shadow-lg ${
-              msg.isBot ? "bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700" : "bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900"
+            className={`flex items-start space-x-3 p-3 rounded-lg ${
+              msg.isBot ? "bg-gray-800" : "bg-gray-900"
             }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <img src={msg.avatar} alt="avatar" className="w-12 h-12 rounded-full ring-4 ring-indigo-500 shadow-lg" />
+            <img
+              src={msg.avatar}
+              alt="avatar"
+              className="w-12 h-12 rounded-full border-2 border-white"
+            />
             <div className="flex flex-col">
               <div className="text-sm font-semibold">{msg.user}</div>
               <div>{msg.text}</div>
@@ -125,8 +121,12 @@ const Chat = ({ user }: { user: any }) => {
           </motion.div>
         ))}
         {isBotTyping && (
-          <div className="flex items-start space-x-3 p-2 rounded-lg bg-gray-700 animate-pulse">
-            <img src="https://path.to/bot/avatar" alt="bot" className="w-12 h-12 rounded-full ring-4 ring-blue-300" />
+          <div className="flex items-start space-x-3 p-2 rounded-lg bg-gray-800 animate-pulse">
+            <img
+              src="https://path.to/bot/avatar"
+              alt="bot"
+              className="w-12 h-12 rounded-full border-2 border-blue-300"
+            />
             <div className="flex flex-col">
               <div className="text-sm font-semibold">Academic Pal Bot</div>
               <div>Typing...</div>
@@ -135,21 +135,21 @@ const Chat = ({ user }: { user: any }) => {
         )}
       </div>
 
-      {/* Input Area with Sleek Design */}
-      <div className="flex items-center p-4 bg-opacity-60 backdrop-blur-md border-t border-gray-700 rounded-xl shadow-lg">
+      {/* Input Area */}
+      <div className="flex items-center p-4 border-t border-gray-700">
         <div className="relative flex-1">
           <input
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-            className="border-none rounded-2xl p-4 w-full bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Ask me anything..."
+            className="border-none rounded-lg p-4 w-full bg-gray-800 text-white focus:outline-none"
+            placeholder="Type your message..."
           />
           <div className="absolute right-4 top-2 flex items-center space-x-2">
-            <FaRegSmile className="cursor-pointer text-gray-300 hover:text-indigo-500" />
+            <FaRegSmile className="cursor-pointer text-gray-300 hover:text-blue-500" />
             <FaPaperclip
-              className="cursor-pointer text-gray-300 hover:text-indigo-500"
+              className="cursor-pointer text-gray-300 hover:text-blue-500"
               onClick={() => document.getElementById("fileInput")?.click()}
             />
             <input
@@ -162,7 +162,7 @@ const Chat = ({ user }: { user: any }) => {
         </div>
         <button
           onClick={handleSubmit}
-          className="ml-4 bg-indigo-600 text-white px-6 py-3 rounded-full hover:bg-indigo-700 transition duration-200 ease-in-out"
+          className="ml-4 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
         >
           Send
         </button>
