@@ -1,6 +1,6 @@
 # 📱 Chat Application - Powered by Firebase
 
-![Chat App Image](https://via.placeholder.com/1200x400?text=Chat+App) <!-- Replace this link with your actual image URL -->
+![Chat App Image](WhatsApp Image 2024-11-23 at 14.37.31_2c51300b.jpg) <!-- Replace this link with your actual image URL -->
 
 Welcome to the **Chat Application** powered by Firebase! This app allows users to send and receive messages in real-time. It's built with **React.js**, **Firebase**, and **Socket.io** for seamless communication.
 
