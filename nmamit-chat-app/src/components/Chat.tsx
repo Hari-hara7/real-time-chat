@@ -86,7 +86,7 @@ const Chat = ({ user }: { user: any }) => {
 
   return (
     <div className="flex flex-col h-screen bg-black text-white">
-      {/* Header with Logo */}
+      
       <div className="flex items-center p-4 border-b border-gray-700">
         <img src={logo} alt="Academic Pal Logo" className="w-16 h-16 mr-4 rounded-full" />
         <h1 className="text-2xl font-semibold">Academic Pal Chat</h1>
