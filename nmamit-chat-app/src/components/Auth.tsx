@@ -8,29 +8,29 @@ import { SiAcademia } from "react-icons/si";
 import logo from "../assets/academicpal.jpg";
 
 const Auth = ({ setUser }: { setUser: (user: any) => void }) => {
-  const [text, setText] = useState(""); // Initial state
+  const [text, setText] = useState(""); 
   const welcomeMessage = "Welcome to Academic Pal! Your Ultimate Academic Companion";
 
-  // Typewriter effect
+  
   useEffect(() => {
     let index = 0;
-    setText(""); // Ensure the text state is cleared before starting
+    setText(""); 
     const intervalId = setInterval(() => {
       if (index < welcomeMessage.length) {
-        setText((prev) => prev + welcomeMessage[index]); // Add one character at a time
+        setText((prev) => prev + welcomeMessage[index]); 
         index++;
       } else {
-        clearInterval(intervalId); // Stop interval when done
+        clearInterval(intervalId); 
       }
     }, 100);
-    return () => clearInterval(intervalId); // Cleanup on unmount
+    return () => clearInterval(intervalId);
   }, []);
 
-  // Google Sign-In
+  
   const signIn = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      setUser(result.user); // Set authenticated user
+      setUser(result.user); 
     } catch (error) {
       console.error("Error signing in:", error);
     }
@@ -38,16 +38,16 @@ const Auth = ({ setUser }: { setUser: (user: any) => void }) => {
 
   return (
     <div className="h-screen flex flex-col bg-black text-white">
-      {/* Header */}
+
       <header className="flex justify-between items-center p-4 md:p-6 bg-transparent shadow-md">
-        {/* Logo */}
+       
         <img
           src={logo}
           alt="Academic Pal Logo"
           className="w-24 h-auto md:w-36 rounded-full shadow-lg" // Smaller logo for mobile
         />
 
-        {/* Sign-In Button */}
+    
         <button
           onClick={signIn}
           className="flex items-center bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 md:px-6 md:py-3 text-sm md:text-base rounded-full hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg transition-transform transform hover:scale-105"
@@ -57,7 +57,7 @@ const Auth = ({ setUser }: { setUser: (user: any) => void }) => {
         </button>
       </header>
 
-      {/* Body */}
+      
       <main className="flex-1 flex items-center justify-center text-center px-4 md:px-6">
         <div className="max-w-lg">
           <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">
@@ -81,7 +81,7 @@ const Auth = ({ setUser }: { setUser: (user: any) => void }) => {
         </div>
       </main>
 
-      {/* Footer */}
+      
       <footer className="bg-black py-6 text-center text-gray-400">
         <div className="flex justify-center gap-6 mb-4">
           <a href="https://hariharanath.is-cod.in/" className="text-yellow-500 hover:text-yellow-600">
