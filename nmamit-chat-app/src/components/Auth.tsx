@@ -44,7 +44,7 @@ const Auth = ({ setUser }: { setUser: (user: any) => void }) => {
         <img
           src={logo}
           alt="Academic Pal Logo"
-          className="w-24 h-auto md:w-36 rounded-full shadow-lg" // Smaller logo for mobile
+          className="w-24 h-auto md:w-36 rounded-full shadow-lg" 
         />
 
     
