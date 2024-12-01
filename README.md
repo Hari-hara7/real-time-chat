@@ -50,5 +50,5 @@ Before running the project, make sure you have the following installed on your s
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/chat-app.git
+git clone https://github.com/Hari-hara7/real-time-chat.git
 cd chat-app
